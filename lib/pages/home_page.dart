@@ -1,6 +1,5 @@
 import 'package:donutshop/pages/util/my_tab.dart';
 import 'package:flutter/material.dart';
-
 import '../tab/burger_tab.dart';
 import '../tab/donut_tab.dart';
 import '../tab/pancake_tab.dart';
@@ -87,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            SizedBox(height: 24,),
+            SizedBox(height: 4,),
 
             //  tab bar
             TabBar(tabs: myTabs),
