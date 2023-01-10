@@ -1,20 +1,14 @@
 import 'package:donutshop/pages/home_page.dart';
 import 'package:donutshop/pages/util/ingredients_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:donutshop/models/donut.dart';
+
 
 class DonutDetails extends StatefulWidget {
-  final String donutFlavor;
-  final String donutPrice;
-  final donutColor;
-  final String imageName;
-  final double borderRadius = 12;
+  final Donut donut;
 
   const DonutDetails({
-    Key? key,
-    required this.donutFlavor,
-    required this.donutPrice,
-    this.donutColor,
-    required this.imageName,
+    Key? key, required this.donut,
   }) : super(key: key);
 
   @override
@@ -33,21 +27,14 @@ class _DonutDetailsState extends State<DonutDetails> {
         title: Row(
           children: [
             IconButton(
-              onPressed: () => Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return const HomePage();
-                  },
-                ),
-              ),
+              onPressed: () => Navigator.pop(context),
               icon: const Icon(
                 Icons.arrow_back,
                 color: Colors.black,
               ),
             ),
             Text(
-              widget.donutFlavor,
+              widget.donut.flavorName,
               style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
             ),
           ],
@@ -59,7 +46,7 @@ class _DonutDetailsState extends State<DonutDetails> {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               decoration: BoxDecoration(
-                color: widget.donutColor[50],
+                color: widget.donut.color[50],
                 borderRadius: const BorderRadius.only(topLeft: Radius.circular(40), topRight: Radius.circular(40)),
               ),
               height: 400,
@@ -70,7 +57,9 @@ class _DonutDetailsState extends State<DonutDetails> {
                     right: 80,
                     top: 100,
                   ),
-                  child: Image.asset(widget.imageName),
+                  child: Hero(
+                      tag: widget.donut.imagePath,
+                      child: Image.asset(widget.donut.imagePath)),
                 ),
               ),
             ),
@@ -87,10 +76,18 @@ class _DonutDetailsState extends State<DonutDetails> {
               ),
             ],
           ),
-          const SizedBox(
-            height: 20,
+          const SizedBox(height: 20),
+          Expanded(flex: 1,
+            child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                IngredientsTile(label: 'Sugar', value: widget.donut.sugar ?? "",color: Colors.blue[100] ,),
+                IngredientsTile(label: 'Salt', value: widget.donut.salt ?? "", color: Colors.pink[100], ),
+                IngredientsTile(label: 'Fat', value: widget.donut.fat ?? "", color: Colors.orange[100],),
+                IngredientsTile(label: 'Energy', value: widget.donut.energy ?? "", color: Colors.purple[100],),
+              ],
+            ),
           ),
-          const IngredientsTile(),
+
         ],
       ),
     );

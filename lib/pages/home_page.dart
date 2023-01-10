@@ -1,3 +1,4 @@
+import 'package:donutshop/models/donut.dart';
 import 'package:donutshop/pages/util/my_tab.dart';
 import 'package:flutter/material.dart';
 import '../tab/burger_tab.dart';
@@ -18,20 +19,15 @@ class _HomePageState extends State<HomePage> {
   // my tabs
   List<Widget> myTabs = [
     // donut tab
-    const MyTab(iconPath: 'lib/icons/donut.png',
-    ),
+    const MyTab(iconPath: 'assets/icons/donut.png'),
     // burger tab
-    const MyTab(iconPath: 'lib/icons/burger.png',
-    ),
+    const MyTab(iconPath: 'assets/icons/burger.png'),
     // smoothie tab
-    const MyTab(iconPath: 'lib/icons/smoothie.png',
-    ),
+    const MyTab(iconPath: 'assets/icons/smoothie.png'),
     // pancake tab
-    const MyTab(iconPath: 'lib/icons/pancake.png',
-    ),
+    const MyTab(iconPath: 'assets/icons/pancake.png'),
     // pizza tab
-    const MyTab(iconPath: 'lib/icons/pizza.png',
-    ),
+    const MyTab(iconPath: 'assets/icons/pizza.png'),
   ];
 
   @override

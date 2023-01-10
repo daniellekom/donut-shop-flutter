@@ -1,37 +1,31 @@
 import 'package:donutshop/pages/donut_details.dart';
 import 'package:flutter/material.dart';
 
+import '../../models/donut.dart';
+
 class DonutTile extends StatelessWidget {
-  final String donutFlavor;
-  final String donutPrice;
-  final MaterialColor donutColor;
-  final String imageName;
-  final double borderRadius = 12;
+final Donut donut;
+final double borderRadius = 12;
 
   const DonutTile({
-    Key? key,
-    required this.donutFlavor,
-    required this.donutPrice,
-    required this.donutColor,
-    required this.imageName})
-      : super(key: key);
+    super.key,
+    required this.donut,
+});
+
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding:  EdgeInsets.all(12.0),
       child: GestureDetector(
-        onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) {
           return  DonutDetails(
-            imageName: imageName,
-            donutFlavor: donutFlavor ,
-            donutPrice: donutPrice,
-            donutColor: donutColor ,
+           donut: donut,
           );
         }, )),
         child: Container(
           decoration: BoxDecoration(
-            color: donutColor[50],
+            color: donut.color[50],
             borderRadius: BorderRadius.circular(12),
           ),
           child: Column(
@@ -42,15 +36,15 @@ class DonutTile extends StatelessWidget {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: donutColor[100],
+                      color: donut.color[100],
                       borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(borderRadius),topRight:Radius.circular(borderRadius) ),
                     ),
                       padding: EdgeInsets.all(12),
                       child: Text(
-                        '\$' + donutPrice,
+                        '\$' + donut.price,
                         style: TextStyle(
-                            color: donutColor[800],
+                            color: donut.color[800],
                             fontWeight: FontWeight.bold,fontSize: 12),
                       ),
                   ),
@@ -60,11 +54,13 @@ class DonutTile extends StatelessWidget {
               // donut picture
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 36.0,vertical: 16),
-                child: Image.asset(imageName),
+                child: Hero(
+                    tag: donut.imagePath,
+                    child: Image.asset(donut.imagePath)),
               ),
 
               // donut flavor
-              Text(donutFlavor,style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+              Text(donut.flavorName,style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
 
               const SizedBox(height: 4,),
 
